@@ -125,3 +125,73 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes moveDashesHorizontal {
+  0% {
+    background-position: 0px 0px;
+  }
+  100% {
+    background-position: 24px 0px;
+  }
+}
+
+@keyframes moveDashesVertical {
+  0% {
+    background-position: 0px 0px;
+  }
+  100% {
+    background-position: 0px 24px;
+  }
+}
+
+@keyframes pulseTravelHorizontal {
+  0% {
+    left: 0%;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes pulseTravelVertical {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+.animate-move-dashes-h {
+  animation: moveDashesHorizontal 0.75s linear infinite !important;
+}
+
+.animate-move-dashes-v {
+  animation: moveDashesVertical 0.75s linear infinite !important;
+}
+
+.animate-travel-h {
+  animation: pulseTravelHorizontal 1.4s ease-in-out infinite !important;
+}
+
+.animate-travel-v {
+  animation: pulseTravelVertical 1.4s ease-in-out infinite !important;
+}
+
+
