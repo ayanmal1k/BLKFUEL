@@ -5,11 +5,13 @@ import Image from 'next/image'
 import { toast } from 'sonner'
 import { Zap, Menu, X } from 'lucide-react'
 import { Magnetic } from '@/components/magnetic'
+import { useWhitepaper } from '@/components/whitepaper-context'
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [buyText, setBuyText] = useState('BUY $BLKFUEL')
+  const { openWhitepaper } = useWhitepaper()
 
   const handleBuyClick = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -31,6 +33,7 @@ export default function Navbar() {
   const navLinks = [
     { name: 'About', href: '#about' },
     { name: 'Tokenomics', href: '#tokenomics' },
+    { name: 'Whitepaper', onClick: openWhitepaper },
     { name: 'Roadmap', href: '#roadmap' },
     { name: 'How to Buy', href: '#buy' },
   ]
@@ -69,17 +72,33 @@ export default function Navbar() {
 
         {/* MIDDLE: Real Nav Links (Desktop) */}
         <nav className="hidden md:flex items-center gap-8 lg:gap-10">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="relative font-morton font-bold text-sm lg:text-base uppercase tracking-wider text-zinc-300 hover:text-[#9FD401] transition-colors duration-200 group py-1"
-            >
-              <span>{link.name}</span>
-              {/* Bottom hover bar indicator */}
-              <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#9FD401] shadow-[0_0_8px_#9FD401] group-hover:w-full transition-all duration-300" />
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            if (link.onClick) {
+              return (
+                <button
+                  key={link.name}
+                  type="button"
+                  onClick={link.onClick}
+                  className="relative font-morton font-bold text-sm lg:text-base uppercase tracking-wider text-zinc-300 hover:text-[#9FD401] transition-colors duration-200 group py-1 cursor-pointer bg-transparent border-none"
+                >
+                  <span>{link.name}</span>
+                  {/* Bottom hover bar indicator */}
+                  <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#9FD401] shadow-[0_0_8px_#9FD401] group-hover:w-full transition-all duration-300" />
+                </button>
+              )
+            }
+            return (
+              <a
+                key={link.name}
+                href={link.href}
+                className="relative font-morton font-bold text-sm lg:text-base uppercase tracking-wider text-zinc-300 hover:text-[#9FD401] transition-colors duration-200 group py-1"
+              >
+                <span>{link.name}</span>
+                {/* Bottom hover bar indicator */}
+                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#9FD401] shadow-[0_0_8px_#9FD401] group-hover:w-full transition-all duration-300" />
+              </a>
+            )
+          })}
         </nav>
 
         {/* RIGHT: Buy Button (Desktop) + Mobile Hamburger Toggle */}
@@ -100,7 +119,7 @@ export default function Navbar() {
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle navigation menu"
-            className="md:hidden p-2 text-zinc-300 hover:text-[#9FD401] transition-colors duration-200"
+            className="md:hidden p-2 text-zinc-300 hover:text-[#9FD401] transition-colors duration-200 cursor-pointer"
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -112,16 +131,33 @@ export default function Navbar() {
       {isMobileMenuOpen && (
         <div className="md:hidden bg-black/95 border-b border-zinc-800/90 backdrop-blur-2xl px-6 py-6 transition-all duration-300 space-y-4 shadow-[0_20px_40px_rgba(0,0,0,0.9)]">
           <nav className="flex flex-col space-y-4">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="font-morton font-bold text-lg uppercase tracking-wider text-zinc-200 hover:text-[#9FD401] transition-colors duration-200"
-              >
-                {link.name}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              if (link.onClick) {
+                return (
+                  <button
+                    key={link.name}
+                    type="button"
+                    onClick={() => {
+                      setIsMobileMenuOpen(false)
+                      link.onClick()
+                    }}
+                    className="font-morton font-bold text-lg uppercase tracking-wider text-left text-zinc-200 hover:text-[#9FD401] transition-colors duration-200 bg-transparent border-none cursor-pointer"
+                  >
+                    {link.name}
+                  </button>
+                )
+              }
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="font-morton font-bold text-lg uppercase tracking-wider text-zinc-200 hover:text-[#9FD401] transition-colors duration-200"
+                >
+                  {link.name}
+                </a>
+              )
+            })}
           </nav>
 
           <div className="pt-2">

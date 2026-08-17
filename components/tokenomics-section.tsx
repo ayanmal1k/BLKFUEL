@@ -8,11 +8,12 @@ import { Magnetic } from '@/components/magnetic'
 
 export default function TokenomicsSection() {
   const tokenDistribution = [
-    { name: 'Liquidity', percent: '40%', color: '#9FD401', bgClass: 'bg-[#9FD401]' },
-    { name: 'Marketing', percent: '20%', color: '#88bc01', bgClass: 'bg-[#88bc01]' },
-    { name: 'Community', percent: '20%', color: '#606953', bgClass: 'bg-[#606953]' },
-    { name: 'Team', percent: '10%', color: '#3d4434', bgClass: 'bg-[#3d4434]' },
-    { name: 'CEX / Listings', percent: '10%', color: '#272b22', bgClass: 'bg-[#272b22]' },
+    { name: 'Total Supply', value: '1,000,000,000 $BLKFUEL', color: '#9FD401' },
+    { name: 'Community', value: '100%', color: '#9FD401' },
+    { name: 'Presale', value: 'None (0%)', color: '#88bc01' },
+    { name: 'Team Allocation', value: 'None (0%)', color: '#606953' },
+    { name: 'Liquidity', value: 'Locked', color: '#b2ee02' },
+    { name: 'Additional Minting', value: 'None (Hard Capped)', color: '#4a533f' },
   ]
 
   const featureCards = [
@@ -28,8 +29,8 @@ export default function TokenomicsSection() {
     },
     {
       icon: <MdGroups className="w-10 h-10 sm:w-12 sm:h-12 text-[#9FD401] drop-shadow-[0_0_12px_rgba(159,212,1,0.6)]" />,
-      line1: 'COMMUNITY',
-      line2: 'DRIVEN',
+      line1: '100%',
+      line2: 'COMMUNITY',
     },
     {
       icon: (
@@ -39,37 +40,40 @@ export default function TokenomicsSection() {
           </div>
         </div>
       ),
-      line1: '100%',
-      line2: 'SAFU',
+      line1: 'ZERO',
+      line2: 'MINTING',
     },
   ]
 
   return (
     <section id="tokenomics" className="relative w-full bg-transparent text-white py-12 sm:py-16 lg:py-20 overflow-hidden select-none">
-      <div className="relative z-10 max-w-[1480px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div className="relative z-10 max-w-[1480px] mx-auto px-5 sm:px-8 lg:px-12 space-y-8">
         {/* Section Heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.6 }}
-          className="mb-8 sm:mb-10 text-left"
+          className="text-left"
         >
           <h2 className="font-morton font-black text-3xl sm:text-4xl lg:text-5xl uppercase tracking-tight text-white drop-shadow-md">
             TOKENOMICS
           </h2>
+          <p className="font-frygia text-zinc-400 text-sm sm:text-base mt-2 max-w-xl">
+            100% fair launch dedicated to the community. No insider bags. No special allocations.
+          </p>
         </motion.div>
 
         {/* Main Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 xl:gap-12 items-center">
           
-          {/* LEFT: Pie Chart + Distribution Legend */}
+          {/* LEFT: 100% Community Donut Chart + Distribution Legend */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9, x: -30 }}
             whileInView={{ opacity: 1, scale: 1, x: 0 }}
             viewport={{ once: false, amount: 0.2 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-6 flex flex-col sm:flex-row items-center sm:items-center justify-start gap-6 sm:gap-10"
+            className="lg:col-span-6 flex flex-col sm:flex-row items-center justify-start gap-6 sm:gap-10"
           >
             
             {/* Donut Chart with Mascot Face in Center */}
@@ -82,79 +86,27 @@ export default function TokenomicsSection() {
                   r="74"
                   fill="transparent"
                   stroke="#18181b"
-                  strokeWidth="30"
+                  strokeWidth="28"
                 />
 
-                {/* 40% Liquidity (0% -> 40%) */}
+                {/* 100% Community Allocation Glow Ring */}
                 <circle
                   cx="100"
                   cy="100"
                   r="74"
                   fill="transparent"
                   stroke="#9FD401"
-                  strokeWidth="30"
-                  strokeDasharray="184.5 464.95"
+                  strokeWidth="28"
+                  strokeDasharray="464.95 464.95"
                   strokeDashoffset="0"
-                  className="transition-all duration-500"
-                />
-
-                {/* 20% Marketing (40% -> 60%) */}
-                <circle
-                  cx="100"
-                  cy="100"
-                  r="74"
-                  fill="transparent"
-                  stroke="#88bc01"
-                  strokeWidth="30"
-                  strokeDasharray="91.5 464.95"
-                  strokeDashoffset="-185.98"
-                  className="transition-all duration-500"
-                />
-
-                {/* 20% Community (60% -> 80%) */}
-                <circle
-                  cx="100"
-                  cy="100"
-                  r="74"
-                  fill="transparent"
-                  stroke="#606953"
-                  strokeWidth="30"
-                  strokeDasharray="91.5 464.95"
-                  strokeDashoffset="-278.97"
-                  className="transition-all duration-500"
-                />
-
-                {/* 10% Team (80% -> 90%) */}
-                <circle
-                  cx="100"
-                  cy="100"
-                  r="74"
-                  fill="transparent"
-                  stroke="#3d4434"
-                  strokeWidth="30"
-                  strokeDasharray="45 464.95"
-                  strokeDashoffset="-371.96"
-                  className="transition-all duration-500"
-                />
-
-                {/* 10% CEX / Listings (90% -> 100%) */}
-                <circle
-                  cx="100"
-                  cy="100"
-                  r="74"
-                  fill="transparent"
-                  stroke="#272b22"
-                  strokeWidth="30"
-                  strokeDasharray="45 464.95"
-                  strokeDashoffset="-418.45"
-                  className="transition-all duration-500"
+                  className="transition-all duration-700 drop-shadow-[0_0_16px_rgba(159,212,1,0.7)]"
                 />
               </svg>
 
               {/* Inner Face Image Container */}
-              <div className="absolute inset-0 m-auto w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-black flex items-center justify-center overflow-visible shadow-[inset_0_0_15px_rgba(0,0,0,0.9)]">
+              <div className="absolute inset-0 m-auto w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-black border border-[#9FD401]/40 flex items-center justify-center overflow-visible shadow-[inset_0_0_20px_rgba(159,212,1,0.2)]">
                 <motion.div
-                  animate={{ scale: [1, 1.05, 1] }}
+                  animate={{ scale: [1, 1.06, 1] }}
                   transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
                   className="relative w-20 h-20 sm:w-24 sm:h-24"
                 >
@@ -163,34 +115,38 @@ export default function TokenomicsSection() {
                     alt="BLKFUEL Face"
                     fill
                     priority
-                    className="object-contain drop-shadow-[0_0_15px_rgba(159,212,1,0.5)] transform hover:scale-110 transition-transform duration-300"
+                    className="object-contain drop-shadow-[0_0_15px_rgba(159,212,1,0.6)] transform hover:scale-110 transition-transform duration-300"
                   />
                 </motion.div>
               </div>
             </div>
 
             {/* Distribution Legend List */}
-            <div className="flex flex-col space-y-3 sm:space-y-3.5 w-full sm:w-auto min-w-[200px]">
+            <div className="flex flex-col space-y-2.5 sm:space-y-3 w-full sm:w-auto min-w-[220px]">
               {tokenDistribution.map((item, idx) => (
                 <motion.div
                   key={item.name}
                   initial={{ opacity: 0, x: -15 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: false }}
-                  transition={{ delay: idx * 0.08, duration: 0.5 }}
-                  className="flex items-center justify-between gap-6 sm:gap-8 group"
+                  transition={{ delay: idx * 0.06, duration: 0.4 }}
+                  className="flex items-center justify-between gap-4 sm:gap-6 group py-0.5 border-b border-zinc-900/60 pb-1.5"
                 >
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2.5">
                     <span
-                      className="w-3.5 h-3.5 rounded-full shrink-0 shadow-[0_0_8px_rgba(0,0,0,0.5)] transition-transform duration-300 group-hover:scale-125"
+                      className="w-3 h-3 rounded-full shrink-0 shadow-[0_0_8px_rgba(0,0,0,0.5)] transition-transform duration-300 group-hover:scale-125"
                       style={{ backgroundColor: item.color }}
                     />
-                    <span className="font-frygia font-medium text-sm sm:text-base text-zinc-200 group-hover:text-white transition-colors duration-200">
+                    <span className="font-frygia font-medium text-xs sm:text-sm text-zinc-300 group-hover:text-white transition-colors duration-200">
                       {item.name}
                     </span>
                   </div>
-                  <span className="font-morton font-bold text-sm sm:text-base text-white tabular-nums tracking-wide">
-                    {item.percent}
+                  <span className={`font-morton font-bold text-xs sm:text-sm tracking-wide ${
+                    item.value.includes('100%') || item.value.includes('Locked')
+                      ? 'text-[#9FD401] drop-shadow-[0_0_8px_rgba(159,212,1,0.4)]'
+                      : 'text-zinc-200'
+                  }`}>
+                    {item.value}
                   </span>
                 </motion.div>
               ))}
@@ -227,7 +183,23 @@ export default function TokenomicsSection() {
           </div>
 
         </div>
+
+        {/* BOTTOM HIGHLIGHT QUOTE CARD */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="relative w-full rounded-2xl bg-zinc-950/90 border border-[#9FD401]/50 p-5 sm:p-6 text-center overflow-hidden shadow-[0_0_25px_rgba(159,212,1,0.15)]"
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-[#9FD401]/10 via-transparent to-[#9FD401]/10 pointer-events-none" />
+          <p className="relative z-10 font-morton font-black text-base sm:text-xl lg:text-2xl text-white uppercase tracking-wide">
+            No insider bags. No special allocations. The community fuels Block Fuel. 🔥
+          </p>
+        </motion.div>
+
       </div>
     </section>
   )
 }
+

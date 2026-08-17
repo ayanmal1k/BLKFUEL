@@ -23,7 +23,7 @@
 **$BLKFUEL** is a next-generation onchain cryptocurrency designed to power decentralization, liquidity, and trading on the **Robinhood Chain**.
 
 - 🚀 **Zero Tax**: 0% buy/sell fees for unrestricted trading and liquidity flow.
-- 🔒 **Liquidity Locked & Contract Renounced**: 100% SAFU community-first architecture.
+- 🔒 **Liquidity Locked & Contract Renounced**: 100% SAFE community-first architecture.
 - ⚡ **Robinhood Chain Native**: Fast finality and low-cost onchain transactions.
 
 ---

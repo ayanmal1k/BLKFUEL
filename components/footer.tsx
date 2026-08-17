@@ -3,12 +3,14 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { Zap } from 'lucide-react'
+import { Zap, FileText } from 'lucide-react'
 import { toast } from 'sonner'
 import { Magnetic } from '@/components/magnetic'
+import { useWhitepaper } from '@/components/whitepaper-context'
 
 export default function Footer() {
   const [buyText, setBuyText] = useState('BUY $BLKFUEL')
+  const { openWhitepaper } = useWhitepaper()
 
   const handleBuyClick = (e: React.MouseEvent) => {
     e.preventDefault()
@@ -23,6 +25,7 @@ export default function Footer() {
     { name: 'Home', href: '#hero' },
     { name: 'About', href: '#about' },
     { name: 'Tokenomics', href: '#tokenomics' },
+    { name: 'Whitepaper', onClick: openWhitepaper },
     { name: 'Roadmap', href: '#roadmap' },
     { name: 'How to Buy', href: '#buy' },
   ]
@@ -78,18 +81,31 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Right: Buy Button + Subtext */}
-            <div className="flex flex-col items-center lg:items-end gap-2.5 w-full sm:w-auto pb-6 sm:pb-8 lg:pb-7">
-              <Magnetic strength={0.25} className="w-full sm:w-auto">
-                <button
-                  type="button"
-                  onClick={handleBuyClick}
-                  className="group inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-4 sm:py-5 rounded-2xl bg-[#9FD401] hover:bg-[#b2ee02] text-black font-morton font-black text-lg sm:text-xl uppercase tracking-wider shadow-[0_0_25px_rgba(159,212,1,0.5)] hover:shadow-[0_0_40px_rgba(159,212,1,0.8)] transition-all duration-300 transform active:scale-95 w-full sm:w-auto cursor-pointer"
-                >
-                  <span>{buyText}</span>
-                  <Zap className="w-5 h-5 sm:w-6 sm:h-6 fill-black stroke-black transition-transform duration-300 group-hover:scale-115" />
-                </button>
-              </Magnetic>
+            {/* Right: Buy Button + Whitepaper Button + Subtext */}
+            <div className="flex flex-col items-center lg:items-end gap-3 w-full sm:w-auto pb-6 sm:pb-8 lg:pb-7">
+              <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+                <Magnetic strength={0.2} className="w-full sm:w-auto">
+                  <button
+                    type="button"
+                    onClick={openWhitepaper}
+                    className="group inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-4 sm:py-5 rounded-2xl bg-zinc-900/90 hover:bg-zinc-800 text-white hover:text-[#9FD401] border border-zinc-700 hover:border-[#9FD401] font-morton font-black text-base sm:text-lg uppercase tracking-wider shadow-[0_0_20px_rgba(0,0,0,0.6)] transition-all duration-300 transform active:scale-95 w-full sm:w-auto cursor-pointer"
+                  >
+                    <FileText className="w-5 h-5 text-[#9FD401] transition-transform duration-300 group-hover:scale-110" />
+                    <span>WHITEPAPER</span>
+                  </button>
+                </Magnetic>
+
+                <Magnetic strength={0.25} className="w-full sm:w-auto">
+                  <button
+                    type="button"
+                    onClick={handleBuyClick}
+                    className="group inline-flex items-center justify-center gap-3 px-8 sm:px-9 py-4 sm:py-5 rounded-2xl bg-[#9FD401] hover:bg-[#b2ee02] text-black font-morton font-black text-lg sm:text-xl uppercase tracking-wider shadow-[0_0_25px_rgba(159,212,1,0.5)] hover:shadow-[0_0_40px_rgba(159,212,1,0.8)] transition-all duration-300 transform active:scale-95 w-full sm:w-auto cursor-pointer"
+                  >
+                    <span>{buyText}</span>
+                    <Zap className="w-5 h-5 sm:w-6 sm:h-6 fill-black stroke-black transition-transform duration-300 group-hover:scale-115" />
+                  </button>
+                </Magnetic>
+              </div>
 
               <span className="font-morton font-bold text-xs sm:text-sm text-zinc-400 uppercase tracking-widest text-center lg:text-right">
                 EVERY BLOCK NEEDS FUEL.
@@ -106,15 +122,29 @@ export default function Footer() {
           </div>
 
           <nav className="flex flex-wrap items-center justify-center gap-5 sm:gap-8">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="hover:text-[#9FD401] transition-colors duration-200"
-              >
-                {link.name}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              if (link.onClick) {
+                return (
+                  <button
+                    key={link.name}
+                    type="button"
+                    onClick={link.onClick}
+                    className="hover:text-[#9FD401] transition-colors duration-200 bg-transparent border-none cursor-pointer font-inherit text-inherit"
+                  >
+                    {link.name}
+                  </button>
+                )
+              }
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="hover:text-[#9FD401] transition-colors duration-200"
+                >
+                  {link.name}
+                </a>
+              )
+            })}
           </nav>
         </div>
 
@@ -122,3 +152,4 @@ export default function Footer() {
     </footer>
   )
 }
+

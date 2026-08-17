@@ -43,9 +43,9 @@ export default function TokenStatsBar() {
       value: '1,000,000,000',
     },
     {
-      icon: <Flame className="w-8 h-8 sm:w-10 sm:h-10 stroke-[2.2]" />,
-      label: 'TAX',
-      value: '0%',
+      icon: <Users className="w-8 h-8 sm:w-10 sm:h-10 stroke-[2.2]" />,
+      label: 'COMMUNITY',
+      value: '100%',
     },
     {
       icon: <Lock className="w-8 h-8 sm:w-10 sm:h-10 stroke-[2.2]" />,
@@ -54,13 +54,13 @@ export default function TokenStatsBar() {
     },
     {
       icon: <ShieldCheck className="w-8 h-8 sm:w-10 sm:h-10 stroke-[2.2]" />,
-      label: 'CONTRACT',
-      value: 'RENOUNCED',
+      label: 'TEAM ALLOCATION',
+      value: 'NONE (0%)',
     },
     {
-      icon: <Users className="w-8 h-8 sm:w-10 sm:h-10 stroke-[2.2]" />,
-      label: 'OWNERSHIP',
-      value: 'COMMUNITY',
+      icon: <Flame className="w-8 h-8 sm:w-10 sm:h-10 stroke-[2.2]" />,
+      label: 'EXTRA MINTING',
+      value: 'NONE',
     },
   ]
 
