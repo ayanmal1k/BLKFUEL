@@ -2,6 +2,7 @@
 
 import React from 'react'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 import { MdAccountBalanceWallet, MdFlashOn, MdArrowForward, MdArrowDownward } from 'react-icons/md'
 import { Magnetic } from '@/components/magnetic'
 
@@ -64,24 +65,33 @@ export default function HowToBuySection() {
   ]
 
   return (
-    <section id="buy" className="relative w-full bg-black text-white py-12 sm:py-16 lg:py-20 overflow-hidden select-none">
-      {/* Ambient background glows */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#9FD401]/10 blur-[150px] rounded-full pointer-events-none" />
-
+    <section id="buy" className="relative w-full bg-transparent text-white py-12 sm:py-16 lg:py-20 overflow-hidden select-none">
       <div className="relative z-10 max-w-[1480px] mx-auto px-5 sm:px-8 lg:px-12">
         {/* Section Heading */}
-        <div className="mb-10 sm:mb-14 text-left">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.6 }}
+          className="mb-10 sm:mb-14 text-left"
+        >
           <h2 className="font-morton font-black text-3xl sm:text-4xl lg:text-5xl uppercase tracking-tight text-white leading-none drop-shadow-md">
             HOW TO BUY <span className="text-[#9FD401] drop-shadow-[0_0_20px_rgba(159,212,1,0.5)]">$BLKFUEL</span>
           </h2>
-        </div>
+        </motion.div>
 
-        {/* Steps Container: Row on Desktop with Animated Arrows, Column on Mobile */}
+        {/* Steps Container */}
         <div className="flex flex-col lg:flex-row items-center lg:items-stretch justify-between gap-4 lg:gap-2">
           {steps.map((step, idx) => (
             <React.Fragment key={step.number}>
               {/* Step Card */}
-              <div className="w-full lg:flex-1">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.2 }}
+                transition={{ delay: idx * 0.12, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                className="w-full lg:flex-1"
+              >
                 <Magnetic strength={0.15} className="w-full h-full">
                   <div className="group h-full bg-black/80 backdrop-blur-xl border-2 border-[#9FD401] rounded-2xl sm:rounded-3xl p-5 sm:p-6 flex items-center gap-4 sm:gap-5 shadow-[0_0_25px_rgba(159,212,1,0.2)] hover:shadow-[0_0_40px_rgba(159,212,1,0.45)] transition-all duration-500 min-h-[140px] sm:min-h-[150px]">
                     {/* Left Icon Area */}
@@ -106,7 +116,7 @@ export default function HowToBuySection() {
                     </div>
                   </div>
                 </Magnetic>
-              </div>
+              </motion.div>
 
               {/* Animated Connecting Arrow between steps */}
               {idx < steps.length - 1 && (

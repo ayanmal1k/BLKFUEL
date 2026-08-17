@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { motion } from 'framer-motion'
 import { Box, Flame, Lock, ShieldCheck, Users } from 'lucide-react'
 import { Magnetic } from '@/components/magnetic'
 
@@ -11,7 +12,7 @@ interface StatItemProps {
   isLast?: boolean
 }
 
-function StatItem({ icon, label, value, isLast = false }: StatItemProps) {
+function StatItem({ icon, label, value }: StatItemProps) {
   return (
     <Magnetic strength={0.15} className="w-full">
       <div className="group flex items-center justify-center sm:justify-start gap-4 px-4 sm:px-6 py-3.5 sm:py-2.5 transition-all duration-300 w-full">
@@ -65,7 +66,13 @@ export default function TokenStatsBar() {
 
   return (
     <section className="relative w-full -mt-4 sm:-mt-5 lg:-mt-6 px-4 sm:px-8 lg:px-10 pb-16 sm:pb-20 z-30 pointer-events-auto">
-      <div className="max-w-[1480px] w-full mx-auto">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.3 }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-[1480px] w-full mx-auto"
+      >
         {/* Glowing Neon Green Stats Rectangle Container */}
         <div className="relative rounded-xl border-2 border-[#9FD401] bg-black/90 backdrop-blur-2xl p-2 sm:p-4 lg:p-5 shadow-[0_0_35px_rgba(159,212,1,0.3)] hover:shadow-[0_0_55px_rgba(159,212,1,0.5)] transition-all duration-500">
           
@@ -75,8 +82,12 @@ export default function TokenStatsBar() {
           {/* Single Column on Mobile, Grid on Tablet, Horizontal on Desktop */}
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 divide-y divide-zinc-800/70 md:divide-y-0 md:divide-x md:divide-zinc-800/80 items-center justify-between">
             {stats.map((stat, idx) => (
-              <div
+              <motion.div
                 key={stat.label}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false }}
+                transition={{ delay: idx * 0.08, duration: 0.5 }}
                 className="flex items-center justify-center w-full"
               >
                 <StatItem
@@ -85,12 +96,12 @@ export default function TokenStatsBar() {
                   value={stat.value}
                   isLast={idx === stats.length - 1}
                 />
-              </div>
+              </motion.div>
             ))}
           </div>
 
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }

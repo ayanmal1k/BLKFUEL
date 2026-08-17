@@ -2,6 +2,7 @@
 
 import React from 'react'
 import Image from 'next/image'
+import { toast } from 'sonner'
 import { Zap, Send } from 'lucide-react'
 import { Magnetic } from '@/components/magnetic'
 
@@ -34,8 +35,19 @@ function DexscreenerIcon({ className = "w-5 h-5 sm:w-6 sm:h-6" }: { className?: 
 
 
 export default function HeroSection() {
+  const [buyText, setBuyText] = React.useState('BUY $BLKFUEL')
+
+  const handleBuyClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    setBuyText('COMING SOON')
+    toast.info('🚀 $BLKFUEL Token: Coming Soon on Robinhood Chain!')
+    setTimeout(() => {
+      setBuyText('BUY $BLKFUEL')
+    }, 2500)
+  }
+
   return (
-    <section className="relative w-full min-h-screen bg-black text-white overflow-hidden flex items-start lg:items-center select-none">
+    <section id="hero" className="relative w-full min-h-screen bg-transparent text-white overflow-hidden flex items-start lg:items-center select-none pt-16 sm:pt-20 lg:pt-0">
       
       {/* Background Images: Mobile & Desktop Versions */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -94,19 +106,22 @@ export default function HeroSection() {
           <div className="mt-7 sm:mt-12 flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-3.5 sm:gap-6 w-full sm:w-auto">
             {/* Primary Buy Button */}
             <Magnetic strength={0.25} className="w-full sm:w-auto">
-              <a
-                href="#buy"
-                className="w-full sm:w-auto group relative inline-flex items-center justify-center gap-2.5 sm:gap-3 px-7 py-3.5 sm:px-11 sm:py-5 rounded-[1.25rem] font-morton font-black text-base sm:text-xl md:text-2xl uppercase tracking-wide bg-[#9FD401] hover:bg-[#b0eb02] text-black shadow-[0_0_30px_rgba(159,212,1,0.5)] hover:shadow-[0_0_50px_rgba(159,212,1,0.85)] transition-all duration-300 transform active:scale-95"
+              <button
+                type="button"
+                onClick={handleBuyClick}
+                className="w-full sm:w-auto group relative inline-flex items-center justify-center gap-2.5 sm:gap-3 px-7 py-3.5 sm:px-11 sm:py-5 rounded-[1.25rem] font-morton font-black text-base sm:text-xl md:text-2xl uppercase tracking-wide bg-[#9FD401] hover:bg-[#b0eb02] text-black shadow-[0_0_30px_rgba(159,212,1,0.5)] hover:shadow-[0_0_50px_rgba(159,212,1,0.85)] transition-all duration-300 transform active:scale-95 cursor-pointer"
               >
-                <span>BUY $BLKFUEL</span>
+                <span>{buyText}</span>
                 <Zap className="w-5 h-5 sm:w-6 sm:h-6 fill-black stroke-black transition-transform duration-300 group-hover:scale-110" />
-              </a>
+              </button>
             </Magnetic>
 
             {/* Secondary Join Community Button */}
             <Magnetic strength={0.25} className="w-full sm:w-auto">
               <a
-                href="#community"
+                href="https://t.me/+MR2aUw2u1qBiYzgx"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-full sm:w-auto group relative inline-flex items-center justify-center gap-2.5 sm:gap-3 px-7 py-3.5 sm:px-11 sm:py-5 rounded-[1.25rem] font-morton font-black text-base sm:text-xl md:text-2xl uppercase tracking-wide bg-black/75 hover:bg-black/90 text-white border border-[#52771b]/90 hover:border-[#9FD401] backdrop-blur-md shadow-[0_4px_25px_rgba(0,0,0,0.6)] hover:shadow-[0_0_30px_rgba(159,212,1,0.3)] transition-all duration-300 transform active:scale-95"
               >
                 <span>JOIN COMMUNITY</span>
@@ -120,7 +135,7 @@ export default function HeroSection() {
             {/* X (Twitter) */}
             <Magnetic strength={0.35}>
               <a
-                href="https://x.com"
+                href="https://x.com/4blockfuel"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Follow us on X"
@@ -133,7 +148,7 @@ export default function HeroSection() {
             {/* Telegram */}
             <Magnetic strength={0.35}>
               <a
-                href="https://t.me"
+                href="https://t.me/+MR2aUw2u1qBiYzgx"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Join Telegram"
@@ -145,13 +160,14 @@ export default function HeroSection() {
 
             {/* Dexscreener / Chart */}
             <Magnetic strength={0.35}>
-              <a
-                href="#chart"
+              <button
+                type="button"
+                onClick={() => toast.info('📊 Chart & Dexscreener: Coming Soon!')}
                 aria-label="View Live Chart"
-                className="w-12 h-12 sm:w-15 sm:h-15 rounded-full bg-black/60 hover:bg-black/85 border border-zinc-700/90 hover:border-[#9FD401] backdrop-blur-md flex items-center justify-center text-white hover:text-[#9FD401] hover:shadow-[0_0_25px_rgba(159,212,1,0.45)] transition-all duration-300 active:scale-90"
+                className="w-12 h-12 sm:w-15 sm:h-15 rounded-full bg-black/60 hover:bg-black/85 border border-zinc-700/90 hover:border-[#9FD401] backdrop-blur-md flex items-center justify-center text-white hover:text-[#9FD401] hover:shadow-[0_0_25px_rgba(159,212,1,0.45)] transition-all duration-300 active:scale-90 cursor-pointer"
               >
                 <DexscreenerIcon className="w-5 h-5 sm:w-6 sm:h-6" />
-              </a>
+              </button>
             </Magnetic>
 
           </div>

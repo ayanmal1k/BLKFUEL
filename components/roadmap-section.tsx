@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
 import { MdRocketLaunch, MdLocalFireDepartment, MdPublic } from 'react-icons/md'
 import { Magnetic } from '@/components/magnetic'
 
@@ -17,7 +18,7 @@ function CubeIcon({ className }: { className?: string }) {
   )
 }
 
-// Continuous Animated Horizontal Connector with JavaScript 60FPS Loop + CSS keyframes
+// Continuous Animated Horizontal Connector with JavaScript 60FPS Loop
 function AnimatedHorizontalConnector({ offset }: { offset: number }) {
   return (
     <div className="relative flex-1 flex items-center justify-center mx-1 sm:mx-2 h-10">
@@ -101,7 +102,6 @@ function AnimatedVerticalConnector({ offset }: { offset: number }) {
 }
 
 export default function RoadmapSection() {
-  // Continuous 60fps animation loop driven by requestAnimationFrame
   const [offset, setOffset] = useState(0)
 
   useEffect(() => {
@@ -111,7 +111,6 @@ export default function RoadmapSection() {
     const loop = (currentTime: number) => {
       const delta = (currentTime - lastTime) / 1000
       lastTime = currentTime
-      // Speed: 32 pixels per second for smooth noticeable flowing dashes
       setOffset((prev) => (prev - delta * 32) % 320)
       frameId = requestAnimationFrame(loop)
     }
@@ -148,28 +147,34 @@ export default function RoadmapSection() {
   ]
 
   return (
-    <section id="roadmap" className="relative w-full bg-black text-white py-12 sm:py-16 lg:py-20 overflow-hidden select-none">
-      {/* Background ambient glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#9FD401]/8 blur-[160px] rounded-full pointer-events-none" />
-
+    <section id="roadmap" className="relative w-full bg-transparent text-white py-12 sm:py-16 lg:py-20 overflow-hidden select-none">
       <div className="relative z-10 max-w-[1480px] mx-auto px-5 sm:px-8 lg:px-12">
         {/* Section Heading */}
-        <div className="mb-10 sm:mb-14 lg:mb-16 text-left">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.6 }}
+          className="mb-10 sm:mb-14 lg:mb-16 text-left"
+        >
           <h2 className="font-morton font-black text-3xl sm:text-4xl lg:text-5xl uppercase tracking-tight text-white drop-shadow-md">
             ROADMAP
           </h2>
-        </div>
+        </motion.div>
 
-        {/* DESKTOP LAYOUT (Horizontal with continuously moving dashed connectors) */}
+        {/* DESKTOP LAYOUT */}
         <div className="hidden lg:block relative w-full pb-6">
-          
-          {/* Main Phase Icons and Connectors Row */}
           <div className="flex items-start justify-between w-full">
             {phases.map((phase, idx) => (
               <React.Fragment key={phase.number}>
                 {/* Single Phase Column */}
-                <div className="flex flex-col items-center text-center w-56 xl:w-64 shrink-0">
-                  
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ delay: idx * 0.12, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                  className="flex flex-col items-center text-center w-56 xl:w-64 shrink-0"
+                >
                   {/* Phase Number Pill */}
                   <div className="w-7 h-7 rounded-full bg-black border-2 border-[#9FD401] flex items-center justify-center font-morton font-bold text-xs text-[#9FD401] shadow-[0_0_12px_rgba(159,212,1,0.5)] mb-2.5 z-20">
                     {phase.number}
@@ -195,10 +200,9 @@ export default function RoadmapSection() {
                       <li key={item} className="leading-snug">{item}</li>
                     ))}
                   </ul>
+                </motion.div>
 
-                </div>
-
-                {/* Continuous Moving Dashed Connector between phases */}
+                {/* Continuous Moving Dashed Connector */}
                 {idx < phases.length - 1 && (
                   <div className="flex-1 self-start mt-20 xl:mt-22 flex items-center justify-center">
                     <AnimatedHorizontalConnector offset={offset} />
@@ -207,24 +211,27 @@ export default function RoadmapSection() {
               </React.Fragment>
             ))}
           </div>
-
         </div>
 
-        {/* MOBILE & TABLET LAYOUT (Vertical timeline — animated line strictly on left rail, NEVER on text) */}
+        {/* MOBILE & TABLET LAYOUT */}
         <div className="block lg:hidden relative">
           <div className="flex flex-col space-y-0">
             {phases.map((phase, idx) => (
-              <div key={phase.number} className="flex flex-col">
+              <motion.div
+                key={phase.number}
+                initial={{ opacity: 0, x: -25 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: false, amount: 0.2 }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-col"
+              >
                 <div className="flex items-start gap-4 sm:gap-6">
-                  
                   {/* Left Column: Number badge + Circle Icon */}
                   <div className="flex flex-col items-center shrink-0 w-16 sm:w-20">
-                    {/* Phase Number Badge */}
                     <div className="w-6 h-6 rounded-full bg-black border-2 border-[#9FD401] flex items-center justify-center font-morton font-bold text-[11px] text-[#9FD401] shadow-[0_0_10px_rgba(159,212,1,0.4)] mb-1.5">
                       {phase.number}
                     </div>
 
-                    {/* Icon Circle */}
                     <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-black border-2 border-[#9FD401] flex items-center justify-center shadow-[0_0_25px_rgba(159,212,1,0.3)]">
                       <div className="scale-85 sm:scale-100 drop-shadow-[0_0_10px_rgba(159,212,1,0.5)]">
                         {phase.icon}
@@ -232,7 +239,7 @@ export default function RoadmapSection() {
                     </div>
                   </div>
 
-                  {/* Right Column: Title + Content (Completely isolated from the line on the left) */}
+                  {/* Right Column: Title + Content */}
                   <div className="pt-6 sm:pt-7 text-left flex-1 min-w-0">
                     <h3 className="font-morton font-black text-lg sm:text-xl uppercase tracking-wider text-white leading-tight">
                       {phase.title}
@@ -243,16 +250,15 @@ export default function RoadmapSection() {
                       ))}
                     </ul>
                   </div>
-
                 </div>
 
-                {/* Animated Vertical Line between stages (aligned with left icon column) */}
+                {/* Animated Vertical Line between stages */}
                 {idx < phases.length - 1 && (
                   <div className="flex items-center w-16 sm:w-20 justify-center">
                     <AnimatedVerticalConnector offset={offset} />
                   </div>
                 )}
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

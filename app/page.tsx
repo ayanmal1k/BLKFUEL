@@ -1,3 +1,6 @@
+import SmoothScroll from '@/components/smooth-scroll'
+import AmbientGlowBackground from '@/components/ambient-glow-background'
+import Navbar from '@/components/navbar'
 import HeroSection from '@/components/hero-section'
 import TokenStatsBar from '@/components/token-stats-bar'
 import AboutSection from '@/components/about-section'
@@ -8,15 +11,24 @@ import Footer from '@/components/footer'
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-black overflow-x-hidden">
-      <HeroSection />
-      <TokenStatsBar />
-      <AboutSection />
-      <TokenomicsSection />
-      <RoadmapSection />
-      <HowToBuySection />
-      <Footer />
-    </main>
+    <SmoothScroll>
+      <main className="relative min-h-screen bg-black overflow-x-hidden text-white selection:bg-[#9FD401] selection:text-black">
+        {/* Dynamic Subtle Green Glow Mesh Background */}
+        <AmbientGlowBackground />
+
+        {/* Page Sections */}
+        <div className="relative z-10">
+          <Navbar />
+          <HeroSection />
+          <TokenStatsBar />
+          <AboutSection />
+          <TokenomicsSection />
+          <RoadmapSection />
+          <HowToBuySection />
+          <Footer />
+        </div>
+      </main>
+    </SmoothScroll>
   )
 }
 
