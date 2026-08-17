@@ -5,8 +5,12 @@ import { frygia, morton } from '@/lib/fonts'
 import './globals.css'
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://blockfuel.netlify.app'),
   title: '$BLKFUEL | Fueling the Onchain Economy',
   description: 'Fueling the onchain economy on Robinhood Chain. Built for builders, traders, degens & believers. EVERY BLOCK NEEDS FUEL.',
+  alternates: {
+    canonical: 'https://blockfuel.netlify.app',
+  },
   icons: {
     icon: '/face.png',
     shortcut: '/face.png',
@@ -15,6 +19,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: '$BLKFUEL | Fueling the Onchain Economy',
     description: 'Fueling the onchain economy on Robinhood Chain. Built for builders, traders, degens & believers. EVERY BLOCK NEEDS FUEL.',
+    url: 'https://blockfuel.netlify.app',
+    siteName: '$BLKFUEL',
     type: 'website',
     images: [
       {
