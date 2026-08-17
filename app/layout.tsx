@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: 'BLKFUEL Sample',
   description: 'Fueling the onchain economy. Built for builders, traders, degens & believers.',
   icons: {
-    icon: '/ton logo.webp',
+    icon: '/robinhood_chain1771327492835.png',
   },
 }
 
