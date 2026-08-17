@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { MdRocketLaunch, MdLocalFireDepartment, MdPublic } from 'react-icons/md'
 import { Magnetic } from '@/components/magnetic'
 
@@ -17,108 +17,109 @@ function CubeIcon({ className }: { className?: string }) {
   )
 }
 
-// Continuous Animated Horizontal Connector with SMIL + CSS + Traveling Energy Pulse
-function AnimatedHorizontalConnector() {
+// Continuous Animated Horizontal Connector with JavaScript 60FPS Loop + CSS keyframes
+function AnimatedHorizontalConnector({ offset }: { offset: number }) {
   return (
-    <div className="relative flex-1 flex items-center justify-center px-1">
-      {/* Animated Dashed SVG Line */}
-      <svg className="w-full h-4 overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 16">
-        <defs>
-          <linearGradient id="neonGlowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#9FD401" stopOpacity="0.6" />
-            <stop offset="50%" stopColor="#c5ff00" stopOpacity="1" />
-            <stop offset="100%" stopColor="#9FD401" stopOpacity="0.6" />
-          </linearGradient>
-          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="1.5" result="blur" />
-            <feComposite in="SourceGraphic" in2="blur" operator="over" />
-          </filter>
-        </defs>
-
-        {/* Glow Underlay Line */}
+    <div className="relative flex-1 flex items-center justify-center mx-1 sm:mx-2 h-10">
+      {/* SVG with dynamic 60fps strokeDashoffset */}
+      <svg className="w-full h-6 overflow-visible" preserveAspectRatio="none" viewBox="0 0 100 24">
+        {/* Glow Layer */}
         <line
           x1="0"
-          y1="8"
+          y1="12"
           x2="100"
-          y2="8"
+          y2="12"
           stroke="#9FD401"
-          strokeWidth="3"
-          strokeDasharray="6, 6"
+          strokeWidth="3.5"
+          strokeDasharray="8 8"
+          strokeDashoffset={offset}
           strokeOpacity="0.4"
-          filter="url(#glow)"
-        >
-          <animate
-            attributeName="stroke-dashoffset"
-            from="0"
-            to="-24"
-            dur="0.8s"
-            repeatCount="indefinite"
-          />
-        </line>
+          className="blur-[2px]"
+        />
 
-        {/* Main Sharp Animated Dashed Line */}
+        {/* Crisp Main Dashed Line */}
         <line
           x1="0"
-          y1="8"
+          y1="12"
           x2="100"
-          y2="8"
-          stroke="url(#neonGlowGrad)"
+          y2="12"
+          stroke="#9FD401"
           strokeWidth="2.5"
-          strokeDasharray="6, 6"
+          strokeDasharray="8 8"
+          strokeDashoffset={offset}
           strokeLinecap="round"
-        >
-          <animate
-            attributeName="stroke-dashoffset"
-            from="0"
-            to="-24"
-            dur="0.8s"
-            repeatCount="indefinite"
-          />
-        </line>
+        />
       </svg>
 
-      {/* Center Checkpoint Node with Pulse */}
+      {/* Center Checkpoint Node */}
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-none">
-        <div className="w-3.5 h-3.5 rounded-full bg-zinc-800 border-2 border-zinc-500 shadow-[0_0_8px_rgba(159,212,1,0.5)] relative">
-          <div className="absolute inset-0 rounded-full bg-[#9FD401] animate-ping opacity-40" />
+        <div className="w-4 h-4 rounded-full bg-zinc-800 border-2 border-zinc-500 shadow-[0_0_10px_rgba(159,212,1,0.6)] relative">
+          <div className="absolute inset-0 rounded-full bg-[#9FD401] animate-ping opacity-50" />
         </div>
       </div>
     </div>
   )
 }
 
-// Continuous Animated Vertical Connector for Mobile
-function AnimatedVerticalConnector() {
+// Continuous Animated Vertical Connector for Mobile with JavaScript 60FPS Loop
+function AnimatedVerticalConnector({ offset }: { offset: number }) {
   return (
-    <div className="relative w-8 h-12 sm:h-14 flex items-center justify-center my-1">
-      <svg className="w-4 h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 16 60">
+    <div className="relative w-16 sm:w-20 h-14 flex items-center justify-center my-1">
+      <svg className="w-6 h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 24 60">
+        {/* Glow Layer */}
         <line
-          x1="8"
+          x1="12"
           y1="0"
-          x2="8"
+          x2="12"
+          y2="60"
+          stroke="#9FD401"
+          strokeWidth="3.5"
+          strokeDasharray="8 8"
+          strokeDashoffset={offset}
+          strokeOpacity="0.4"
+          className="blur-[2px]"
+        />
+
+        {/* Crisp Main Line */}
+        <line
+          x1="12"
+          y1="0"
+          x2="12"
           y2="60"
           stroke="#9FD401"
           strokeWidth="2.5"
-          strokeDasharray="6, 6"
+          strokeDasharray="8 8"
+          strokeDashoffset={offset}
           strokeLinecap="round"
-        >
-          <animate
-            attributeName="stroke-dashoffset"
-            from="0"
-            to="-24"
-            dur="0.8s"
-            repeatCount="indefinite"
-          />
-        </line>
+        />
       </svg>
 
-      {/* Center Node on Mobile */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-zinc-800 border border-zinc-500 shadow-[0_0_6px_rgba(159,212,1,0.6)]" />
+      {/* Center Checkpoint Node on Mobile */}
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-zinc-800 border border-zinc-400 shadow-[0_0_8px_rgba(159,212,1,0.6)]" />
     </div>
   )
 }
 
 export default function RoadmapSection() {
+  // Continuous 60fps animation loop driven by requestAnimationFrame
+  const [offset, setOffset] = useState(0)
+
+  useEffect(() => {
+    let frameId: number
+    let lastTime = performance.now()
+
+    const loop = (currentTime: number) => {
+      const delta = (currentTime - lastTime) / 1000
+      lastTime = currentTime
+      // Speed: 32 pixels per second for smooth noticeable flowing dashes
+      setOffset((prev) => (prev - delta * 32) % 320)
+      frameId = requestAnimationFrame(loop)
+    }
+
+    frameId = requestAnimationFrame(loop)
+    return () => cancelAnimationFrame(frameId)
+  }, [])
+
   const phases = [
     {
       number: '1',
@@ -159,7 +160,7 @@ export default function RoadmapSection() {
           </h2>
         </div>
 
-        {/* DESKTOP LAYOUT (Horizontal with direct animated connectors between phases) */}
+        {/* DESKTOP LAYOUT (Horizontal with continuously moving dashed connectors) */}
         <div className="hidden lg:block relative w-full pb-6">
           
           {/* Main Phase Icons and Connectors Row */}
@@ -197,10 +198,10 @@ export default function RoadmapSection() {
 
                 </div>
 
-                {/* Continuous Animated Connector between phases */}
+                {/* Continuous Moving Dashed Connector between phases */}
                 {idx < phases.length - 1 && (
                   <div className="flex-1 self-start mt-20 xl:mt-22 flex items-center justify-center">
-                    <AnimatedHorizontalConnector />
+                    <AnimatedHorizontalConnector offset={offset} />
                   </div>
                 )}
               </React.Fragment>
@@ -231,7 +232,7 @@ export default function RoadmapSection() {
                     </div>
                   </div>
 
-                  {/* Right Column: Title + Content (Completely isolated from the line) */}
+                  {/* Right Column: Title + Content (Completely isolated from the line on the left) */}
                   <div className="pt-6 sm:pt-7 text-left flex-1 min-w-0">
                     <h3 className="font-morton font-black text-lg sm:text-xl uppercase tracking-wider text-white leading-tight">
                       {phase.title}
@@ -248,7 +249,7 @@ export default function RoadmapSection() {
                 {/* Animated Vertical Line between stages (aligned with left icon column) */}
                 {idx < phases.length - 1 && (
                   <div className="flex items-center w-16 sm:w-20 justify-center">
-                    <AnimatedVerticalConnector />
+                    <AnimatedVerticalConnector offset={offset} />
                   </div>
                 )}
               </div>
