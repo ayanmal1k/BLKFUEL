@@ -160,14 +160,15 @@ export default function HeroSection() {
 
             {/* Dexscreener / Chart */}
             <Magnetic strength={0.35}>
-              <button
-                type="button"
-                onClick={() => toast.info('📊 Chart & Dexscreener: Coming Soon!')}
-                aria-label="View Live Chart"
-                className="w-12 h-12 sm:w-15 sm:h-15 rounded-full bg-black/60 hover:bg-black/85 border border-zinc-700/90 hover:border-[#9FD401] backdrop-blur-md flex items-center justify-center text-white hover:text-[#9FD401] hover:shadow-[0_0_25px_rgba(159,212,1,0.45)] transition-all duration-300 active:scale-90 cursor-pointer"
+              <a
+                href="https://dexscreener.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="View Dexscreener Charts"
+                className="w-12 h-12 sm:w-15 sm:h-15 rounded-full bg-black/60 hover:bg-black/85 border border-zinc-700/90 hover:border-[#9FD401] backdrop-blur-md flex items-center justify-center text-white hover:text-[#9FD401] hover:shadow-[0_0_25px_rgba(159,212,1,0.45)] transition-all duration-300 active:scale-90"
               >
                 <DexscreenerIcon className="w-5 h-5 sm:w-6 sm:h-6" />
-              </button>
+              </a>
             </Magnetic>
 
           </div>

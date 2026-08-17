@@ -1,0 +1,21 @@
+{
+  "name": "$BLKFUEL | Fueling the Onchain Economy",
+  "short_name": "$BLKFUEL",
+  "description": "Fueling the onchain economy on Robinhood Chain. Every block needs fuel.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#9FD401",
+  "icons": [
+    {
+      "src": "/face.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/face.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
