@@ -3,6 +3,8 @@ import TokenStatsBar from '@/components/token-stats-bar'
 import AboutSection from '@/components/about-section'
 import TokenomicsSection from '@/components/tokenomics-section'
 import RoadmapSection from '@/components/roadmap-section'
+import HowToBuySection from '@/components/how-to-buy-section'
+import Footer from '@/components/footer'
 
 export default function HomePage() {
   return (
@@ -12,6 +14,8 @@ export default function HomePage() {
       <AboutSection />
       <TokenomicsSection />
       <RoadmapSection />
+      <HowToBuySection />
+      <Footer />
     </main>
   )
 }
