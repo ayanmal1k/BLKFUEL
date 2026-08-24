@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { toast } from 'sonner'
-import { Zap, Menu, X } from 'lucide-react'
+import { Zap, Menu, X, Gamepad2 } from 'lucide-react'
 import { Magnetic } from '@/components/magnetic'
 import { useWhitepaper } from '@/components/whitepaper-context'
 
@@ -36,6 +36,7 @@ export default function Navbar() {
     { name: 'Whitepaper', onClick: openWhitepaper },
     { name: 'Roadmap', href: '#roadmap' },
     { name: 'How to Buy', href: '#buy' },
+    { name: 'Game', href: '#game' },
   ]
 
   return (
@@ -71,7 +72,7 @@ export default function Navbar() {
         </Magnetic>
 
         {/* MIDDLE: Real Nav Links (Desktop) */}
-        <nav className="hidden md:flex items-center gap-8 lg:gap-10">
+        <nav className="hidden lg:flex items-center gap-7 xl:gap-9">
           {navLinks.map((link) => {
             if (link.onClick) {
               return (
@@ -101,9 +102,22 @@ export default function Navbar() {
           })}
         </nav>
 
-        {/* RIGHT: Buy Button (Desktop) + Mobile Hamburger Toggle */}
-        <div className="flex items-center gap-4">
-          {/* Desktop Only CTA Button */}
+        {/* RIGHT: Game Button + Buy Button (Desktop) + Mobile Hamburger Toggle */}
+        <div className="flex items-center gap-3 sm:gap-3.5">
+          {/* Play Game Navbar CTA */}
+          <Magnetic strength={0.25} className="hidden sm:inline-block">
+            <a
+              href="https://blkfuelgame.netlify.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center justify-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl bg-zinc-950/90 hover:bg-zinc-900 border border-[#9FD401]/50 hover:border-[#9FD401] text-white hover:text-[#9FD401] font-morton font-black text-xs sm:text-sm uppercase tracking-wider shadow-[0_0_15px_rgba(159,212,1,0.2)] hover:shadow-[0_0_25px_rgba(159,212,1,0.4)] transition-all duration-300 transform active:scale-95 cursor-pointer"
+            >
+              <Gamepad2 className="w-4 h-4 text-[#9FD401] transition-transform duration-300 group-hover:scale-115 group-hover:rotate-12" />
+              <span>PLAY GAME</span>
+            </a>
+          </Magnetic>
+
+          {/* Desktop Only Buy Button */}
           <Magnetic strength={0.25} className="hidden md:inline-block">
             <button
               type="button"
@@ -119,7 +133,7 @@ export default function Navbar() {
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle navigation menu"
-            className="md:hidden p-2 text-zinc-300 hover:text-[#9FD401] transition-colors duration-200 cursor-pointer"
+            className="lg:hidden p-2 text-zinc-300 hover:text-[#9FD401] transition-colors duration-200 cursor-pointer"
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -129,7 +143,7 @@ export default function Navbar() {
 
       {/* MOBILE MENU DROPDOWN */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-black/95 border-b border-zinc-800/90 backdrop-blur-2xl px-6 py-6 transition-all duration-300 space-y-4 shadow-[0_20px_40px_rgba(0,0,0,0.9)]">
+        <div className="lg:hidden bg-black/95 border-b border-zinc-800/90 backdrop-blur-2xl px-6 py-6 transition-all duration-300 space-y-4 shadow-[0_20px_40px_rgba(0,0,0,0.9)]">
           <nav className="flex flex-col space-y-4">
             {navLinks.map((link) => {
               if (link.onClick) {
@@ -160,7 +174,20 @@ export default function Navbar() {
             })}
           </nav>
 
-          <div className="pt-2">
+          <div className="pt-2 space-y-3">
+            {/* Mobile Play Game Button */}
+            <a
+              href="https://blkfuelgame.netlify.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="inline-flex w-full items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-zinc-900 border border-[#9FD401]/60 text-[#9FD401] font-morton font-black text-base uppercase tracking-wider shadow-[0_0_15px_rgba(159,212,1,0.2)] transition-all duration-300 cursor-pointer"
+            >
+              <Gamepad2 className="w-5 h-5 text-[#9FD401]" />
+              <span>PLAY GAME</span>
+            </a>
+
+            {/* Mobile Buy Button */}
             <button
               type="button"
               onClick={(e) => {

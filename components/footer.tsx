@@ -28,6 +28,7 @@ export default function Footer() {
     { name: 'Whitepaper', onClick: openWhitepaper },
     { name: 'Roadmap', href: '#roadmap' },
     { name: 'How to Buy', href: '#buy' },
+    { name: 'Game', href: '#game' },
   ]
 
   return (

@@ -4,6 +4,7 @@ import Navbar from '@/components/navbar'
 import HeroSection from '@/components/hero-section'
 import TokenStatsBar from '@/components/token-stats-bar'
 import AboutSection from '@/components/about-section'
+import GameSection from '@/components/game-section'
 import TokenomicsSection from '@/components/tokenomics-section'
 import RoadmapSection from '@/components/roadmap-section'
 import HowToBuySection from '@/components/how-to-buy-section'
@@ -31,6 +32,7 @@ export default function HomePage() {
             <TokenomicsSection />
             <RoadmapSection />
             <HowToBuySection />
+            <GameSection />
             <Footer />
           </div>
         </main>
