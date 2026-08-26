@@ -5,8 +5,23 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { MdAccountBalanceWallet, MdFlashOn, MdArrowForward, MdArrowDownward } from 'react-icons/md'
 import { Magnetic } from '@/components/magnetic'
+import { useContractAddress } from '@/hooks/useContractAddress'
+import { toast } from 'sonner'
+import { Copy, Check } from 'lucide-react'
 
 export default function HowToBuySection() {
+  const { contractAddress } = useContractAddress()
+  const [copied, setCopied] = React.useState(false)
+
+  const handleCopy = () => {
+    if (contractAddress && contractAddress !== 'Loading...' && !contractAddress.includes('not found') && !contractAddress.includes('Error')) {
+      navigator.clipboard.writeText(contractAddress)
+      setCopied(true)
+      toast.success('Contract address copied!')
+      setTimeout(() => setCopied(false), 2000)
+    }
+  }
+
   const steps = [
     {
       number: '1',
@@ -135,6 +150,40 @@ export default function HowToBuySection() {
             </React.Fragment>
           ))}
         </div>
+
+        {/* Contract Address Box */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
+          className="mt-12 max-w-2xl mx-auto"
+        >
+          <div className="bg-black/60 border border-[#9FD401]/50 rounded-2xl p-4 sm:p-6 backdrop-blur-xl flex flex-col sm:flex-row items-center gap-4 justify-between">
+            <div className="flex flex-col text-center sm:text-left min-w-0">
+              <span className="font-morton font-bold text-[#9FD401] text-sm uppercase tracking-wider mb-1">
+                Contract Address
+              </span>
+              <span className="font-mono text-white text-sm sm:text-base truncate max-w-[250px] sm:max-w-none">
+                {contractAddress}
+              </span>
+            </div>
+            <button
+              onClick={handleCopy}
+              className="flex items-center gap-2 px-6 py-3 bg-[#9FD401] hover:bg-[#b0eb02] text-black font-morton font-bold uppercase rounded-xl transition-all duration-300 hover:shadow-[0_0_20px_rgba(159,212,1,0.4)] active:scale-95 shrink-0"
+            >
+              {copied ? (
+                <>
+                  <Check className="w-5 h-5" /> Copied!
+                </>
+              ) : (
+                <>
+                  <Copy className="w-5 h-5" /> Copy
+                </>
+              )}
+            </button>
+          </div>
+        </motion.div>
 
       </div>
     </section>

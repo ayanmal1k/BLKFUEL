@@ -6,20 +6,26 @@ import { toast } from 'sonner'
 import { Zap, Menu, X, Gamepad2 } from 'lucide-react'
 import { Magnetic } from '@/components/magnetic'
 import { useWhitepaper } from '@/components/whitepaper-context'
+import { useContractAddress } from '@/hooks/useContractAddress'
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [buyText, setBuyText] = useState('BUY $BLKFUEL')
   const { openWhitepaper } = useWhitepaper()
+  const { buyLink } = useContractAddress()
 
   const handleBuyClick = (e: React.MouseEvent) => {
     e.preventDefault()
-    setBuyText('COMING SOON')
-    toast.info('🚀 $BLKFUEL Token: Coming Soon on Robinhood Chain!')
-    setTimeout(() => {
-      setBuyText('BUY $BLKFUEL')
-    }, 2500)
+    if (buyLink) {
+      window.open(buyLink, '_blank')
+    } else {
+      setBuyText('COMING SOON')
+      toast.info('🚀 $BLKFUEL Token: Coming Soon on Robinhood Chain!')
+      setTimeout(() => {
+        setBuyText('BUY $BLKFUEL')
+      }, 2500)
+    }
   }
 
   useEffect(() => {

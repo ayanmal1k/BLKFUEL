@@ -3,8 +3,9 @@
 import React from 'react'
 import Image from 'next/image'
 import { toast } from 'sonner'
-import { Zap, Send } from 'lucide-react'
+import { Zap, Send, Copy, Check } from 'lucide-react'
 import { Magnetic } from '@/components/magnetic'
+import { useContractAddress } from '@/hooks/useContractAddress'
 
 // SVG Social Icons
 function XTwitterIcon({ className = "w-5 h-5 sm:w-6 sm:h-6" }: { className?: string }) {
@@ -36,14 +37,32 @@ function DexscreenerIcon({ className = "w-5 h-5 sm:w-6 sm:h-6" }: { className?: 
 
 export default function HeroSection() {
   const [buyText, setBuyText] = React.useState('BUY $BLKFUEL')
+  const { contractAddress, buyLink } = useContractAddress()
+  const [copied, setCopied] = React.useState(false)
+
+  const isAddressValid = contractAddress && contractAddress !== 'Loading...' && !contractAddress.includes('not found') && !contractAddress.includes('Error')
+  const dexscreenerUrl = isAddressValid ? `https://dexscreener.com/robinhood/${contractAddress}` : 'https://dexscreener.com'
+
+  const handleCopy = () => {
+    if (isAddressValid) {
+      navigator.clipboard.writeText(contractAddress)
+      setCopied(true)
+      toast.success('Contract address copied!')
+      setTimeout(() => setCopied(false), 2000)
+    }
+  }
 
   const handleBuyClick = (e: React.MouseEvent) => {
     e.preventDefault()
-    setBuyText('COMING SOON')
-    toast.info('🚀 $BLKFUEL Token: Coming Soon on Robinhood Chain!')
-    setTimeout(() => {
-      setBuyText('BUY $BLKFUEL')
-    }, 2500)
+    if (buyLink) {
+      window.open(buyLink, '_blank')
+    } else {
+      setBuyText('COMING SOON')
+      toast.info('🚀 $BLKFUEL Token: Coming Soon on Robinhood Chain!')
+      setTimeout(() => {
+        setBuyText('BUY $BLKFUEL')
+      }, 2500)
+    }
   }
 
   return (
@@ -130,6 +149,22 @@ export default function HeroSection() {
             </Magnetic>
           </div>
 
+          {/* Contract Address Field */}
+          <div className="mt-5 sm:mt-8 w-full sm:w-auto flex justify-center sm:justify-start">
+            <div className="flex items-center bg-black/60 border border-zinc-700/90 rounded-xl p-2 pl-4 backdrop-blur-md max-w-[90vw] sm:max-w-md w-full sm:w-auto">
+              <span className="font-mono text-sm sm:text-base text-zinc-300 truncate flex-1 mr-4">
+                {contractAddress}
+              </span>
+              <button
+                onClick={handleCopy}
+                className="p-2.5 bg-[#9FD401] hover:bg-[#b0eb02] text-black rounded-lg transition-colors shrink-0"
+                title="Copy Contract Address"
+              >
+                {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+              </button>
+            </div>
+          </div>
+
           {/* Social Icons Row */}
           <div className="mt-7 sm:mt-14 flex items-center justify-center sm:justify-start gap-3.5 sm:gap-5">
             {/* X (Twitter) */}
@@ -161,7 +196,7 @@ export default function HeroSection() {
             {/* Dexscreener / Chart */}
             <Magnetic strength={0.35}>
               <a
-                href="https://dexscreener.com"
+                href={dexscreenerUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="View Dexscreener Charts"
