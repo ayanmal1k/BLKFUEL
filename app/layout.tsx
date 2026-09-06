@@ -3,6 +3,7 @@ import { Analytics } from '@vercel/analytics/next'
 import { Toaster } from 'sonner'
 import { frygia, morton } from '@/lib/fonts'
 import './globals.css'
+import Script from 'next/script'
 
 export const viewport: Viewport = {
   themeColor: '#9FD401',
@@ -186,6 +187,11 @@ export default function RootLayout({
           }}
         />
         <Analytics />
+        <Script
+          src="https://cdn.zanderio.ai/widget/loader.js"
+          data-id="wdg_81bG1M032OC8T4YPar2UPGkd"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   )
